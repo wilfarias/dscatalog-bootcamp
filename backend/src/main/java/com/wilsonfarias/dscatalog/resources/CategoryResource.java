@@ -1,6 +1,5 @@
 package com.wilsonfarias.dscatalog.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wilsonfarias.dscatalog.entities.Category;
+import com.wilsonfarias.dscatalog.dto.CategoryDTO;
 import com.wilsonfarias.dscatalog.services.CategoryService;
 
 /* O resource implementa o controlador REST do modelo de camadas,
@@ -27,8 +26,8 @@ public class CategoryResource {
 	 * No caso ele retorna a lista com as categorias no corpo da resposta HTTP;*/
 	
 	@GetMapping //Define o endpoint
-	public ResponseEntity<List<Category>> findAll(){
-		List<Category> list = service.findAll();		
+	public ResponseEntity<List<CategoryDTO>> findAll(){
+		List<CategoryDTO> list = service.findAll();		
 		return ResponseEntity.ok().body(list);
 	}
 

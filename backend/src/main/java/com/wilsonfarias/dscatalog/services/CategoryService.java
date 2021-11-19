@@ -1,21 +1,26 @@
 package com.wilsonfarias.dscatalog.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.wilsonfarias.dscatalog.dto.CategoryDTO;
 import com.wilsonfarias.dscatalog.entities.Category;
 import com.wilsonfarias.dscatalog.repositories.CategoryRepository;
 
 @Service
 public class CategoryService {
-	
+
 	@Autowired
 	private CategoryRepository repository;
-	
-	public List<Category> findAll(){
-		return repository.findAll();
+
+	@Transactional(readOnly = true)
+	public List<CategoryDTO> findAll() {
+		List<Category> list = repository.findAll();
+		return list.stream().map(category -> new CategoryDTO(category)).collect(Collectors.toList());
 	}
 
 }
