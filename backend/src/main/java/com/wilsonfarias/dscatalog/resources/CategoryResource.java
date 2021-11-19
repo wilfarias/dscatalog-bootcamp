@@ -3,12 +3,14 @@ package com.wilsonfarias.dscatalog.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wilsonfarias.dscatalog.entities.Category;
+import com.wilsonfarias.dscatalog.services.CategoryService;
 
 /* O resource implementa o controlador REST do modelo de camadas,
  * ou seja, a API REST */
@@ -17,15 +19,16 @@ import com.wilsonfarias.dscatalog.entities.Category;
 @RequestMapping(value = "/categories") //rota do recurso REST
 public class CategoryResource {
 	
+	@Autowired
+	private CategoryService service;
+	
 	/* Response Entity encapsula as respostas HTTP utilizada no REST;
 	 * Ele é um Generic, dessa forma, pode-se definir o tipo de resposta esperada;
 	 * No caso ele retorna a lista com as categorias no corpo da resposta HTTP;*/
 	
 	@GetMapping //Define o endpoint
 	public ResponseEntity<List<Category>> findAll(){
-		List<Category> list = new ArrayList<>();
-		list.add(new Category(1L, "Books"));
-		list.add(new Category(2L, "Electronics"));
+		List<Category> list = service.findAll();		
 		return ResponseEntity.ok().body(list);
 	}
 

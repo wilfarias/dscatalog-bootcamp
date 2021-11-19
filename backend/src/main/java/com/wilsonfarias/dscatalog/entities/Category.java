@@ -2,9 +2,24 @@ package com.wilsonfarias.dscatalog.entities;
 
 import java.io.Serializable;
 
+/* Import do pacote javax pois é o pacote da especificação,
+ * ao contrátio do hibernate que é a implementação.
+ * Boa prática de dev pois ao substituir a implementação do hibernate,
+ * não precisa mudar o código, dado que o mesmo está atrelado a especificação 
+ */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_category")
 public class Category implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // id auto incrementável
 	private Long id;
 	private String name;
 	
