@@ -1,8 +1,7 @@
 package com.springproject.dscatalog.services;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +24,11 @@ public class CategoryService {
 		 * e converte o strem novamente para um List ao final
 		 */
 		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
+	}
+
+	public CategoryDTO findById(Long id) {
+		Optional<Category> obj = repository.findById(id);
+		Category categoryById = obj.get();
+		return new CategoryDTO(categoryById);
 	}
 }
