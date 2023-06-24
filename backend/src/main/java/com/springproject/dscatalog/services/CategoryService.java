@@ -1,10 +1,14 @@
 package com.springproject.dscatalog.services;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springproject.dscatalog.dto.CategoryDTO;
 import com.springproject.dscatalog.entities.Category;
 import com.springproject.dscatalog.repositories.CategoryRepository;
 
@@ -14,8 +18,12 @@ public class CategoryService {
 	@Autowired //injecao de dependencia automatica do Spring
 	private CategoryRepository repository;
 	
-	public List<Category> findAll(){
+	public List<CategoryDTO> findAll(){
 		List<Category> list = repository.findAll();
-		return list;
+		/* Para cada elemento do stream mapeado (que são tipo Category),
+		 * passa-o para o construtor de CategoryDTO
+		 * e converte o strem novamente para um List ao final
+		 */
+		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
 	}
 }
