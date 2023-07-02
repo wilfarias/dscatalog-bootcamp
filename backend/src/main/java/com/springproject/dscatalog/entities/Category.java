@@ -1,12 +1,15 @@
 package com.springproject.dscatalog.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 
-import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +21,15 @@ public class Category implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrementavel no BD
 	private Long id;
 	private String name;
+	
+	/*Utilizado no padrão UTC (GMT), para fins de auditoria
+	 * quando o usuário for capturar esse dado, este será
+	 * convertido na aplicação para o fuso do usuário*/
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	Instant createdAt;
+	
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	Instant updatedAt;
 	
 	public Category() {
 	}
@@ -42,6 +54,26 @@ public class Category implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+	
+	/*Método chamado automaticamente antes
+	 * de criar uma categoria*/
+	@PrePersist
+	public void preSave() {
+		createdAt = Instant.now();
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		updatedAt = Instant.now();
 	}
 
 	@Override
