@@ -64,8 +64,7 @@ public class Category implements Serializable{
 		return updatedAt;
 	}
 	
-	/*Método chamado automaticamente antes
-	 * de criar uma categoria*/
+	/*Método chamado automaticamente antes de criar uma categoria*/
 	@PrePersist
 	public void preSave() {
 		createdAt = Instant.now();
