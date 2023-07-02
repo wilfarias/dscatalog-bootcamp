@@ -28,7 +28,7 @@ public class CategoryService {
 		Page<Category> categoryPaged = repository.findAll(pageRequest);
 		/* Para cada elemento do stream mapeado (que são tipo Category),
 		 * passa-o para o construtor de CategoryDTO */
-		return categoryPaged.map(x -> new CategoryDTO(x));
+		return categoryPaged.map(categoryObj -> new CategoryDTO(categoryObj));
 	}
 
 	@Transactional(readOnly = true)

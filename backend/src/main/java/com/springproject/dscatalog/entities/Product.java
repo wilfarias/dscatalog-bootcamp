@@ -5,8 +5,6 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.ManyToAny;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +26,7 @@ public class Product implements Serializable{
 	private String name;
 	
 	@Column(columnDefinition = "TEXT")
-	private String description;
-	
+	private String description;	
 	private Double price;
 	private String imgUrl;
 	

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springproject.dscatalog.entities.Category;
 import com.springproject.dscatalog.entities.Product;
 
@@ -94,13 +95,17 @@ public class ProductDTO implements Serializable{
 		this.date = date;
 	}
 
+	/* Utiliza-se essa propriedade para personalizar o JSON key
+	 * a ser enviado para o front-end, assim ele não fica
+	 * com o nome categoriesDTO, mas apenas categories*/
+	@JsonProperty("categories") 
 	public List<CategoryDTO> getCategoriesDto() {
 		return categoriesDto;
 	}
 
-	public void setCategoriesDto(List<CategoryDTO> categoriesDto) {
-		this.categoriesDto = categoriesDto;
-	}
+	/*public void setCategoriesDto(List<CategoryDTO> categories) {
+		this.categoriesDto = categories;
+	}*/
 	
 	
 }
