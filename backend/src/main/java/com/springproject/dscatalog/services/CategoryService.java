@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +25,8 @@ public class CategoryService {
 	private CategoryRepository repository;
 	
 	@Transactional(readOnly = true)
-	public Page<CategoryDTO> findAll(PageRequest pageRequest){
-		Page<Category> categoryPaged = repository.findAll(pageRequest);
+	public Page<CategoryDTO> findAll(Pageable pageable){
+		Page<Category> categoryPaged = repository.findAll(pageable);
 		/* Para cada elemento do stream mapeado (que são tipo Category),
 		 * passa-o para o construtor de CategoryDTO */
 		return categoryPaged.map(categoryObj -> new CategoryDTO(categoryObj));
