@@ -2,10 +2,11 @@ package com.springproject.dscatalog.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,6 @@ import com.springproject.dscatalog.entities.Category;
 import com.springproject.dscatalog.repositories.CategoryRepository;
 import com.springproject.dscatalog.services.exceptions.DataBaseException;
 import com.springproject.dscatalog.services.exceptions.ResourceNotFoundException;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CategoryService {
@@ -52,7 +51,7 @@ public class CategoryService {
 	@Transactional
 	public CategoryDTO update(Long id, CategoryDTO dto) {
 		try {
-			Category category = repository.getReferenceById(id);
+			Category category = repository.getOne(id);
 			category.setName(dto.getName());
 			category = repository.save(category);
 			return new CategoryDTO(category);

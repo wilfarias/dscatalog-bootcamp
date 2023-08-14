@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.springproject.dscatalog.entities.Product;
-import com.springproject.dscatalog.factories.FactoryProduct;
+import com.springproject.dscatalog.factories.Factory;
 import com.springproject.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @DataJpaTest
@@ -25,7 +25,7 @@ public class ProductRepositoryTests {
 	
 	@BeforeEach
 	void setUp() throws Exception{
-		product = FactoryProduct.createProduct();
+		product = Factory.createProduct();
 		existingId = 1L;
 		nonExistingId = 1000L;
 		countTotalIdProducts = 25L;
