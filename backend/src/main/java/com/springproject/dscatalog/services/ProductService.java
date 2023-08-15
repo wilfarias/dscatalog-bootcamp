@@ -73,7 +73,7 @@ public class ProductService {
 		} catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id "+ id +" not found ");
 		} catch(DataIntegrityViolationException e) {
-			throw new DataBaseException("Id must not be null");
+			throw new DataBaseException("Id "+ id +" integrity violation ");
 		}
 	}
 	
